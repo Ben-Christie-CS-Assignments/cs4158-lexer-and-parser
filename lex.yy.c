@@ -422,12 +422,15 @@ char *yytext;
 #define INITIAL 0
 /* include libraries */
 #line 3 "lexicalAnalyser.l"
+#include "y.tab.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "tokens.h"
+/* disable default behaviour of Flex (i.e. wrapping the input file automatically) */
+/* enables the tracking of the line number in the input file */
 /* rules */
-#line 431 "lex.yy.c"
+#line 434 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -578,9 +581,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 13 "lexicalAnalyser.l"
+#line 17 "lexicalAnalyser.l"
 
-#line 584 "lex.yy.c"
+#line 587 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -673,85 +676,85 @@ do_action:	/* This label is used only to access EOF actions. */
 	{ /* beginning of action switch */
 case 1:
 YY_RULE_SETUP
-#line 14 "lexicalAnalyser.l"
+#line 18 "lexicalAnalyser.l"
 { return START; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "lexicalAnalyser.l"
+#line 19 "lexicalAnalyser.l"
 { return END; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 16 "lexicalAnalyser.l"
+#line 20 "lexicalAnalyser.l"
 { return MAIN; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 17 "lexicalAnalyser.l"
+#line 21 "lexicalAnalyser.l"
 { return MOVE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 18 "lexicalAnalyser.l"
+#line 22 "lexicalAnalyser.l"
 { return TO; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 19 "lexicalAnalyser.l"
+#line 23 "lexicalAnalyser.l"
 { return ADD; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 20 "lexicalAnalyser.l"
+#line 24 "lexicalAnalyser.l"
 { return INPUT; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 21 "lexicalAnalyser.l"
+#line 25 "lexicalAnalyser.l"
 { return PRINT; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 23 "lexicalAnalyser.l"
+#line 27 "lexicalAnalyser.l"
 { return SEMICOLON; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 25 "lexicalAnalyser.l"
+#line 29 "lexicalAnalyser.l"
 { yylval.integer = atoi(yytext); return INTEGER; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 26 "lexicalAnalyser.l"
+#line 30 "lexicalAnalyser.l"
 { yylval.text = strdup(yytext + 1); yylval.text[strlen(yylval.text) - 1] = '\0'; return TEXT; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 27 "lexicalAnalyser.l"
+#line 31 "lexicalAnalyser.l"
 { yylval.text = strdup(yytext); return DECLARATION; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 28 "lexicalAnalyser.l"
+#line 32 "lexicalAnalyser.l"
 { yylval.text = strdup(yytext); return IDENTIFIER; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 30 "lexicalAnalyser.l"
+#line 34 "lexicalAnalyser.l"
 {/* ignore white spaces */}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 31 "lexicalAnalyser.l"
+#line 35 "lexicalAnalyser.l"
 { fprintf(stderr, "Invalid character '%c' on line %d\n", yytext[0], yylineno); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 32 "lexicalAnalyser.l"
+#line 36 "lexicalAnalyser.l"
 ECHO;
 	YY_BREAK
-#line 755 "lex.yy.c"
+#line 758 "lex.yy.c"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -1635,5 +1638,5 @@ int main()
 	return 0;
 	}
 #endif
-#line 32 "lexicalAnalyser.l"
+#line 36 "lexicalAnalyser.l"
 

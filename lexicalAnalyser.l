@@ -1,12 +1,16 @@
 /* include libraries */
 %{
+#include "y.tab.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "tokens.h"
 %}
 
+/* disable default behaviour of Flex (i.e. wrapping the input file automatically) */
 %option noyywrap
+
+/* enables the tracking of the line number in the input file */
 %option yylineno
 
 /* rules */

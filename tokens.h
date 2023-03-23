@@ -11,9 +11,3 @@
 #define TEXT 11
 #define DECLARATION 12
 #define IDENTIFIER 13
-
-typedef union YYSTYPE
-{
-  int integer;
-  char *text;
-} YYSTYPE;
