@@ -27,10 +27,10 @@
 ";"                   { return SEMICOLON; }
 
 [0-9]+                { yylval.integer = atoi(yytext); return INTEGER; }
-\"[^\"]*              { yylval.text = strdup(yytext + 1); yylval.text[strlen(yylval.text) - 1] = '\0'; return TEXT; }
-"S"+[1-9]+[0-9]*" "+[a-zA-Z_][a-zA-Z0-9_-]*"."  { yylval.text = strdup(yytext); return DECLARATION; }
+\"[^\"]*\"            { yylval.text = strdup(yytext + 1); yylval.text[strlen(yylval.text) - 1] = '\0'; return TEXT; }
+"S"+[1-9][0-9]*" "+[a-zA-Z_][a-zA-Z0-9_-]*"."  { yylval.text = strdup(yytext); return DECLARATION; }
 [a-zA-Z_][a-zA-Z0-9_-]* { yylval.text = strdup(yytext); return IDENTIFIER; }
 
 [ \t\n]               {/* ignore white spaces */}
-.{1}                  { fprintf(stderr, "Invalid character '%c' on line %d\n", yytext[0], yylineno); }
+.                     { fprintf(stderr, "Invalid character '%c' on line %d\n", yytext[0], yylineno); }
 %%
