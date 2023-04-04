@@ -22,7 +22,7 @@
 %token INPUT
 %token PRINT
 %token SEMICOLON
-%token DECLARATION
+%token <text> DECLARATION
 
 %start program
 
@@ -37,7 +37,7 @@ declaration_list:
   ;
 
 declaration:
-  DECLARATION IDENTIFIER '.'  {
+  DECLARATION IDENTIFIER "."  {
     handle_declaration($1, $2);
   }
   ;
@@ -47,19 +47,21 @@ statement_list:
   ;
 
 statement:
-  MOVE (IDENTIFIER | INTEGER) TO IDENTIFIER  {
+  MOVE IDENTIFIER | INTEGER TO IDENTIFIER  {
     char* src = strtok(yytext, " ");
     char* dest = strtok(NULL, " ");
     handle_move(src, dest);
   }
-  | ADD (IDENTIFIER | INTEGER) TO IDENTIFIER  {
-    handle_add($2, $4);
+  | ADD IDENTIFIER | INTEGER TO IDENTIFIER  {   
+    char* src = strtok(yytext, " ");
+    char* dest = strtok(NULL, " ");
+    handle_move(src, dest);
   }
   | INPUT identifier_list  {  
-    handle_input($identifier_list, $identifier_list.count);
+    handle_input(identifier_list, identifier_list.count);
   }
   | PRINT print_list  {
-    handle_print($print_list, $print_list.count);
+    handle_print(print_list, print_list.count);
   }
   ;
 
@@ -71,7 +73,7 @@ identifier_list:
 print_list:
   TEXT
   | IDENTIFIER
-  | print_list SEMICOLON (TEXT | IDENTIFIER)
+  | print_list SEMICOLON TEXT | IDENTIFIER
   ;
 
 %%
@@ -97,7 +99,7 @@ void handle_declaration(char* size, char* name) {
   }
 
   for(int i = 0; i < capacity; i++) {
-    if(size[i] != 'S') {
+    if(size[i] != "S") {
       printf("Error: invalid capacity specified for variable %s\n", name);
       exit(1);
     }
@@ -118,7 +120,7 @@ void handle_add(char* src, char* dest) {
 
 /* handling INPUT statements */
 void handle_input(char** identifiers, int count) {
-  printf('INPUT ');
+  printf("INPUT ");
 
   for(int i = 0; i < count; i++) {
     printf("%s", identifiers[i]);
@@ -128,14 +130,14 @@ void handle_input(char** identifiers, int count) {
     }
   }
 
-  printf('\n');
+  printf("\n");
 }
 
 /* handling PRINT statements */
 void handle_print(char** print_items, int count) {
   printf("PRINT ");
 
-  for(int i = 0; i < count; i) {
+  for(int i = 0; i < count; i++) {
     printf("%s", print_items[i]);
 
     if(i != count - 1) {

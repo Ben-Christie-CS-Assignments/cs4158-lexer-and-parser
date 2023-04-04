@@ -1,6 +1,6 @@
 /* include libraries */
 %{
-#include "y.tab.h"
+#include "parser.tab.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
