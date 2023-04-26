@@ -418,9 +418,9 @@ goto find_rule; \
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "lexicalAnalyser.l"
+#line 1 "lexer.l"
 #define INITIAL 0
-#line 2 "lexicalAnalyser.l"
+#line 2 "lexer.l"
 #include "parser.tab.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -577,7 +577,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 13 "lexicalAnalyser.l"
+#line 13 "lexer.l"
 
 #line 583 "lex.yy.c"
 
@@ -672,82 +672,82 @@ do_action:	/* This label is used only to access EOF actions. */
 	{ /* beginning of action switch */
 case 1:
 YY_RULE_SETUP
-#line 14 "lexicalAnalyser.l"
+#line 14 "lexer.l"
 { return START; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "lexicalAnalyser.l"
+#line 15 "lexer.l"
 { return END; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 16 "lexicalAnalyser.l"
+#line 16 "lexer.l"
 { return MAIN; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 17 "lexicalAnalyser.l"
+#line 17 "lexer.l"
 { return MOVE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 18 "lexicalAnalyser.l"
+#line 18 "lexer.l"
 { return TO; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 19 "lexicalAnalyser.l"
+#line 19 "lexer.l"
 { return ADD; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 20 "lexicalAnalyser.l"
+#line 20 "lexer.l"
 { return INPUT; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 21 "lexicalAnalyser.l"
+#line 21 "lexer.l"
 { return PRINT; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 23 "lexicalAnalyser.l"
+#line 23 "lexer.l"
 { return SEMICOLON; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 25 "lexicalAnalyser.l"
+#line 25 "lexer.l"
 { yylval.integer = atoi(yytext); return INTEGER; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 26 "lexicalAnalyser.l"
+#line 26 "lexer.l"
 { yylval.text = strdup(yytext + 1); yylval.text[strlen(yylval.text) - 1] = '\0'; return TEXT; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 27 "lexicalAnalyser.l"
+#line 27 "lexer.l"
 { yylval.text = strdup(yytext); return DECLARATION; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 28 "lexicalAnalyser.l"
+#line 28 "lexer.l"
 { yylval.text = strdup(yytext); return IDENTIFIER; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 30 "lexicalAnalyser.l"
+#line 30 "lexer.l"
 {}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 31 "lexicalAnalyser.l"
+#line 31 "lexer.l"
 { fprintf(stderr, "Invalid character '%c' on line %d\n", yytext[0], yylineno); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 32 "lexicalAnalyser.l"
+#line 32 "lexer.l"
 ECHO;
 	YY_BREAK
 #line 754 "lex.yy.c"
@@ -1634,4 +1634,4 @@ int main()
 	return 0;
 	}
 #endif
-#line 32 "lexicalAnalyser.l"
+#line 32 "lexer.l"
