@@ -1,4 +1,3 @@
-/* include libraries */
 %{
 #include "parser.tab.h"
 #include <stdio.h>
@@ -7,13 +6,10 @@
 #include "tokens.h"
 %}
 
-/* disable default behaviour of Flex (i.e. wrapping the input file automatically) */
 %option noyywrap
 
-/* enables the tracking of the line number in the input file */
 %option yylineno
 
-/* rules */
 %%
 "START"               { return START; }
 "END"                 { return END; }
@@ -31,6 +27,6 @@
 "S"+[1-9][0-9]*" "+[a-zA-Z_][a-zA-Z0-9_-]*"."  { yylval.text = strdup(yytext); return DECLARATION; }
 [a-zA-Z_][a-zA-Z0-9_-]* { yylval.text = strdup(yytext); return IDENTIFIER; }
 
-[ \t\n]               {/* ignore white spaces */}
+[ \t\n]               {}
 .                     { fprintf(stderr, "Invalid character '%c' on line %d\n", yytext[0], yylineno); }
 %%

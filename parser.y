@@ -78,18 +78,15 @@ print_list:
 
 %%
 
-/* main function */
 int main() {
   yyparse();
   return 0;
 }
 
-/* error handling */
 void yyerror(const char *s) {
   fprintf(stderr, "Error: %s\n", s);
 }
 
-/* handling variable declaration */
 void handle_declaration(char* size, char* name) {
   int capacity = strlen(size);
 
@@ -108,17 +105,14 @@ void handle_declaration(char* size, char* name) {
   printf("Variable %s declared with capacity %d\n", name, capacity);
 }
 
-/* handling MOVE statements */
 void handle_move(char* src, char* dest) {
   printf("Move %s to %s\n", src, dest);
 }
 
-/* handling ADD statements */
 void handle_add(char* src, char* dest) {
   printf("Add %s to %s\n", src, dest);
 }
 
-/* handling INPUT statements */
 void handle_input(char** identifiers, int count) {
   printf("INPUT ");
 
@@ -133,7 +127,6 @@ void handle_input(char** identifiers, int count) {
   printf("\n");
 }
 
-/* handling PRINT statements */
 void handle_print(char** print_items, int count) {
   printf("PRINT ");
 
@@ -148,7 +141,6 @@ void handle_print(char** print_items, int count) {
   printf("\n");
 }
 
-/* main parsing function */
 int yyparse() {
     char line[1000];
     char* token;
@@ -172,9 +164,8 @@ int yyparse() {
         
         while (token != NULL) {
             if (strcasecmp(token, "START.") == 0) {
-                /* start of program */
+                
             } else if (strcasecmp(token, "END.") == 0) {
-                /* end of program */
                 
                 if (in_main == 0) {
                     fprintf(stderr, "Error: no statements in MAIN\n");
@@ -183,10 +174,8 @@ int yyparse() {
                 
                 return 0;
             } else if (strcasecmp(token, "MAIN") == 0) {
-                /* start of main section */
                 in_main = 1;
             } else if (strcasecmp(token, "DECLARATION") == 0) {
-                /* variable declaration */
                 declaration_size = strtok(NULL, " \t\r\n");
                 declaration_name = strtok(NULL, " \t\r\n");
                 
@@ -194,10 +183,9 @@ int yyparse() {
                     fprintf(stderr, "Error: invalid declaration syntax on line %d\n", line_number);
                     return 1;
                 }
-                
-                /* handle variable declaration */
+
             } else if (strcasecmp(token, "MOVE") == 0) {
-                /* variable assignment */
+        
                 move_src = strtok(NULL, " \t\r\n");
                 token = strtok(NULL, " \t\r\n");
                 
@@ -213,9 +201,9 @@ int yyparse() {
                     return 1;
                 }
                 
-                /* handle variable assignment */
+
             } else if (strcasecmp(token, "ADD") == 0) {
-                /* variable addition */
+          
                 move_src = strtok(NULL, " \t\r\n");
                 token = strtok(NULL, " \t\r\n");
                 
@@ -231,9 +219,9 @@ int yyparse() {
                     return 1;
                 }
                 
-                /* handle variable addition */
+        
             } else if (strcasecmp(token, "INPUT") == 0) {
-                /* input statement */
+             
                 if (in_main == 0) {
                     fprintf(stderr, "Error: INPUT statement not in MAIN on line %d\n", line_number);
                     return 1;
@@ -246,28 +234,27 @@ int yyparse() {
                     return 1;
                 }
                 
-                /* add identifier to list of input identifiers */
+           
                 input_identifiers[input_count] = strdup(token);
                 input_count++;
             } else if (strcasecmp(token, "PRINT") == 0) {
-                /* print statement */
+                
                 if (in_main == 0) {
                     fprintf(stderr, "Error: PRINT statement not in MAIN on line %d\n", line_number);
                     return 1;
                 }
-                
-                /* allocate space for print items */
+         
                 print_items = (char**) realloc(print_items, (print_count + 1) * sizeof(char*));
                 
-                /* get first print item */
+            
                 token = strtok(NULL, " \t\r\n");
                 
                 while (token != NULL) {
-                    /* add print item to list */
+                    
                     print_items[print_count] = strdup(token);
                     print_count++;
                     
-                    /* get next print item */
+                  
                     token = strtok(NULL, " \t\r\n");
                 }
             } else {
@@ -275,11 +262,11 @@ int yyparse() {
                 return 1;
             }
             
-            /* get next token */
+        
             token = strtok(NULL, " \t\r\n");
         }
         
-        /* increment line number */
+ 
         line_number++;
     }
 
